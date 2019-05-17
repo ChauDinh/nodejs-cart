@@ -50,6 +50,14 @@ app.get("/products/create", (req, res) => {
   res.render('products/create');
 });
 
+app.get("/products/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  let product = db.get('products').find({ id: id }).value();
+  res.render('products/view', {
+    product: product
+  });
+});
+
 app.post("/products/create", (req, res) => {
   db.get('products').unshift(req.body).write();
   res.redirect("/products");
