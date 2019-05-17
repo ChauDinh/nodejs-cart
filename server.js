@@ -1,5 +1,6 @@
 const express = require("express");
 const low = require("lowdb");
+const shortid = require("shortid");
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("db.json");
 
@@ -51,7 +52,7 @@ app.get("/products/create", (req, res) => {
 });
 
 app.get("/products/:id", (req, res) => {
-  let id = parseInt(req.params.id);
+  let id = req.params.id;
   let product = db.get('products').find({ id: id }).value();
   res.render('products/view', {
     product: product
@@ -59,6 +60,7 @@ app.get("/products/:id", (req, res) => {
 });
 
 app.post("/products/create", (req, res) => {
+  req.body.id = shortid.generate();
   db.get('products').unshift(req.body).write();
   res.redirect("/products");
 })
