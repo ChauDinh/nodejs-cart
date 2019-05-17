@@ -1,4 +1,14 @@
 const express = require("express");
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
+const adapter = new FileSync("db.json");
+
+db = low(adapter);
+
+// Set some defaults(required if the JSON file is empty)
+db.defaults({
+  products: []
+}).write();
 
 // execute
 const app = express();
@@ -10,17 +20,7 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-// Initialize mock data
-const products = [
-  {
-    id: 1,
-    name: "quan lot nu"
-  },
-  {
-    id: 2,
-    name: 'quan lot nam'
-  }
-];
+
 
 // routes
 app.get("/", (req, res) => {
@@ -31,13 +31,16 @@ app.get("/", (req, res) => {
 
 app.get("/products", (req, res) => {
   res.render('products/index', {
-    products: products
+    products: db.get('products').value()
   });
 });
 
 app.get("/products/search", (req, res) => {
   let q = req.query.q;
-  let matchedProducts = products.filter(product => product.name.toLowerCase().indexOf(q.toLowerCase()) !== -1);
+  let matchedProducts = db.get('products').filter('products', function(product) {
+    return product;
+  }).value();
+  console.log(matchedProducts);
   res.render('products/index', {
     products: matchedProducts
   });
@@ -48,7 +51,7 @@ app.get("/products/create", (req, res) => {
 });
 
 app.post("/products/create", (req, res) => {
-  products.unshift(req.body);
+  db.get('products').unshift(req.body).write();
   res.redirect("/products");
 })
 
