@@ -1,14 +1,17 @@
-h1 Products 
+extends ../layout/common.pug
+block content
 
-a(href="/products/create") New Products
+  h1 Products 
 
-form(action="/products/search", method="GET") 
-  input(type="text", name="q")
-  button Search
+  a(href="/products/create") New Products
 
-ul
-  each product in products 
-    li
-      span= product.name
-      span &nbsp;
-      a(href="/products/" + product.id) View
+  form(action="/products/search", method="GET", class="d-flex") 
+    input(type="text", name="q", class="form-control")
+    button(class="btn btn-primary ml-2") Search
+
+  ul
+    each product in products 
+      li
+        span= product.name
+        span &nbsp;
+        a(href="/products/" + product.id) View
