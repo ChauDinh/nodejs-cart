@@ -3,7 +3,14 @@ block content
   h1 Create Products
 
   form(method="POST", action="/products/create")
-    label Name
-    input(name="name", type="text")
+    .form-group
+      label(for="name") Name
+      input#name.form-control(name="name", type="text")
+    .form-group 
+      label(for="author") Author
+      input#author.form-control(name="author", type="text")
+    .form-group
+      label(for="published") Published
+      input#published.form-control(name="published", type="text")
 
-    button Create
+    button.btn.btn-primary Create
