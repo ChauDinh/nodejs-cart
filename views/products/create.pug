@@ -2,15 +2,19 @@ extends ../layout/common.pug
 block content
   h1 Create Products
 
+  if errors
+    each error in errors
+      .alert.alert-danger= error
+
   form(method="POST", action="/products/create")
     .form-group
       label(for="name") Name
-      input#name.form-control(name="name", type="text")
+      input#name.form-control(name="name", type="text", value=values ? values.name : '')
     .form-group 
       label(for="author") Author
-      input#author.form-control(name="author", type="text")
+      input#author.form-control(name="author", type="text", value=values ? values.author : '')
     .form-group
       label(for="published") Published
-      input#published.form-control(name="published", type="text")
+      input#published.form-control(name="published", type="text", value=values ? values.published : '')
 
     button.btn.btn-primary Create
