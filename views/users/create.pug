@@ -1,0 +1,16 @@
+extends ../layout/common.pug
+block content
+  h1 Register
+
+  form(method="POST", action="/users/create")
+    .form-group
+      label(for="username") Username
+      input#name.form-control(name="username", type="text", value=values ? values.username : '')
+    .form-group 
+      label(for="password") Password
+      input#password.form-control(name="password", type="password", value=values ? values.password : '')
+    .form-group
+      label(for="email") Email
+      input#email.form-control(name="email", type="text", value=values ? values.email : '')
+
+    button.btn.btn-primary Register

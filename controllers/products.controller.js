@@ -31,24 +31,8 @@ module.exports.productDetails = (req, res) => {
 
 module.exports.postProducts = (req, res) => {
   req.body.id = shortid.generate();
-  let errors = [];
-  if (!req.body.name) {
-    errors.push("Name is required!");
-  }
-  if (!req.body.author) {
-    errors.push("Author is required!");
-  }
-  if (!req.body.published) {
-    errors.push("Published year is required!");
-  }
-
-  if (errors.length) {
-    res.render("products/create", {
-      errors: errors,
-      values: req.body
-    });
-    return; 
-  }
+  console.log(res.locals.success);
+  // checking the code for products validation in validation/products.validation.js  
   db.get('products').unshift(req.body).write();
   res.redirect("/products");
 }

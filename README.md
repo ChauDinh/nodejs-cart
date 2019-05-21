@@ -29,3 +29,9 @@ npm run server:watch
 ```
 
 Or we can check the demo version here: nodejs.cart.netlify.com
+
+### About middleware functions
+
+```JavaScript
+
+```

@@ -1,6 +1,7 @@
 const express = require("express");
 
 const productsRoute = require("./routes/products.route");
+const usersRoute = require("./routes/users.route");
 
 // execute
 const app = express();
@@ -22,6 +23,9 @@ app.get("/", (req, res) => {
 
 // products routes
 app.use("/products", productsRoute);
+
+// users routes
+app.use("/users", usersRoute);
 
 // listen
 app.listen(8080, () => console.log("the server is listening on port 8080"));
