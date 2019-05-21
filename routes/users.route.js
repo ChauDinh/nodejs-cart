@@ -2,17 +2,17 @@ const express = require("express");
 
 const controller = require("../controllers/users.controller");
 const userValidation = require("../validation/users.validation");
+const authMiddleware = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 
 router.get("/create", controller.create);
 
-router.get("/cookie", (req, res, next) => {
-  res.cookie('user-id', 12345);
-  res.send('Hello, cookies');
-});
+router.get("/login", controller.login);
 
-router.get("/:id", controller.userInfo);
+router.get("/:id", authMiddleware.requireAuth, controller.userInfo);
+
+router.post("/login", controller.postLogin);
 
 router.post("/create", userValidation.postUsers, controller.postUsers);
 
