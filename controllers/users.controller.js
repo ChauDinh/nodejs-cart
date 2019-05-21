@@ -2,6 +2,7 @@ const db = require("../db");
 const shortid = require("shortid");
 
 module.exports.create = (req, res) => {
+  console.log(req.cookies);
   res.render("users/create");
 }
 
