@@ -16,7 +16,7 @@ module.exports.postProducts = function(req, res, next) {
       errors: errors,
       values: req.body
     });
-    return; 
+    return;
   }
 
   res.locals.success = true;

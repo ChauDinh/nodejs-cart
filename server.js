@@ -11,15 +11,15 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.use(cookieParser());
 
 // set view engine
-app.set('view engine', 'pug');
-app.set('views', './views');
+app.set("view engine", "pug");
+app.set("views", "./views");
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // home routes
 app.get("/", (req, res) => {
-  res.render('index', {
-    name: 'Chau Dinh'
+  res.render("index", {
+    name: "Chau Dinh"
   });
 });
 
