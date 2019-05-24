@@ -48,7 +48,9 @@ module.exports.postLogin = (req, res) => {
     return;
   }
 
-  res.cookie("userid", user.id);
+  res.cookie("userid", user.id, {
+    signed: true
+  });
   res.redirect("/"); // we will replace the route to book-cart latter
 };
 
