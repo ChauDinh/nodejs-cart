@@ -1,5 +1,6 @@
 const db = require("../db");
 const shortid = require("shortid");
+const md5 = require("md5");
 
 module.exports.create = (req, res) => {
   res.render("users/create");
@@ -22,7 +23,7 @@ module.exports.login = (req, res) => {
 
 module.exports.postLogin = (req, res) => {
   let email = req.body.email;
-  let password = req.body.password;
+  let password = md5(req.body.password); // hash password by md5 before checking whether it matches to user password in database
 
   // Find in database the user having the same email, if yes then check the user password
 
@@ -53,6 +54,7 @@ module.exports.postLogin = (req, res) => {
 
 module.exports.postUsers = (req, res) => {
   req.body.id = shortid.generate();
+  req.body.password = md5(req.body.password);
   console.log(res.locals.success);
   // checking the code for user register validation in validation/users.validation.js
   db.get("users")
