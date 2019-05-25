@@ -55,6 +55,10 @@ module.exports.postLogin = (req, res) => {
 };
 
 module.exports.postUsers = (req, res) => {
+  req.body.avatar = req.file.path
+    .split("/")
+    .slice(1)
+    .join("/");
   req.body.id = shortid.generate();
   req.body.password = md5(req.body.password);
   console.log(res.locals.success);
