@@ -9,13 +9,16 @@ const cookieParser = require("cookie-parser");
 
 const productsRoute = require("./routes/products.route");
 const usersRoute = require("./routes/users.route");
+const cartRoute = require("./routes/cart.route");
 const isUser = require("./middlewares/isUser.middleware");
+const session = require("./middlewares/session.middleware");
 
 // execute
 const app = express();
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(session);
 
 // set view engine
 app.set("view engine", "pug");
@@ -35,6 +38,9 @@ app.use("/products", isUser.isUser, productsRoute);
 
 // users routes
 app.use("/users", isUser.isUser, usersRoute);
+
+// cart routes
+app.use("/cart", cartRoute);
 
 // listen
 app.listen(8080, () => console.log("the server is listening on port 8080"));

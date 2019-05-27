@@ -21,6 +21,8 @@ html
               | Home 
           li.nav-item
             a.nav-link(href='/products') Products
+          li.nav-item 
+            a.nav-link(href="#") Cart (#{cart.reduce((a, b) => a + b)})
       
       p(style={ color: 'white' })= username
 
