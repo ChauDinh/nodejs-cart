@@ -58,3 +58,5 @@ users: [
 ]
 
 ```
+
+### CSRF Attack (Cross-site request forgery)

@@ -19,10 +19,8 @@ module.exports = function(req, res, next) {
       .get("sessions")
       .find({ id: sessionId })
       .get("cart")
-      .value()
+      .value() || []
   );
-
-  console.log(res.locals.cart);
 
   next();
 };
