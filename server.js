@@ -2,11 +2,11 @@
 require("dotenv").config();
 
 const express = require("express");
+const csurf = require("csurf");
 
 console.log(process.env.SESSION_SECRET);
 
 const cookieParser = require("cookie-parser");
-const csurf = require("csurf");
 
 const productsRoute = require("./routes/products.route");
 const usersRoute = require("./routes/users.route");
@@ -21,7 +21,6 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(session);
-app.use(csurf({ cookie: true }));
 
 // set view engine
 app.set("view engine", "pug");
@@ -44,6 +43,9 @@ app.use("/users", isUser.isUser, usersRoute);
 
 // cart routes
 app.use("/cart", cartRoute);
+
+// csrf middleware
+app.use(csurf({ cookie: true }));
 
 // transfer routes
 app.use("/transfer", isUser.isUser, transferRoute);
