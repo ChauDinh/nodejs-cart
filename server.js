@@ -30,7 +30,7 @@ app.use(express.static("public"));
 
 // home routes
 app.get("/", isUser.isUser, (req, res) => {
-  res.render("index", {
+  res.render("./layout/landing.pug", {
     name: "Chau Dinh"
   });
 });
